@@ -22,8 +22,6 @@ app.post("/api", (req, res) => {
     res.sendStatus(200);
 });
 
-//app.post()
-
 //const { exec, spawn } = require("child_process");
     //const data = req.body;
 
