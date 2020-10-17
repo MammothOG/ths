@@ -1,23 +1,28 @@
 const express = require('express');
-const app = express();
+  const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Web server running [port = ${PORT}]`));
-
+app.use(express.static("public"));
 app.use(express.json());
-app.use(express.static('public'));
-//app.use((req, res) => {
-//    res.status(404).send('Unknown Request');
-//})
 
+http.listen(port, function(){
+  console.log('listening on port:' + port);
+});
+
+io.on('connection', (socket) => {
+  console.log("socked is connected");
+  io.emit('request', "socked is connected");
+});
 
 app.post("/api", (req, res) => {
     console.log("Receive post request");
-
     res.sendStatus(200);
 });
 
+//app.post()
 
 //const { exec, spawn } = require("child_process");
     //const data = req.body;

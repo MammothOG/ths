@@ -1,1 +1,5 @@
-document.getElementById("sample").innerHTML = "YES"
+const socket = io();
+
+socket.on('request', function (msg) {
+  console.log(msg);
+});
