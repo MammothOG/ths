@@ -11,9 +11,15 @@ const handler = require('./handler');
 app.use(express.static("public"));
 app.use(express.json());
 
-const postHandler_ = R.curry(async (fn, ctx) => {
-  const response = await R.pipe(fn)(ctx.req, ctx.res);
+const fs = require("fs");
+const debug = (req, res) => {
+  console.log(req.body)
+  res.sendStatus(200);
+}
 
+const postHandler_ = R.curry(async (fn, req, res) => {
+  const response = await R.pipe(debug)(req, res);
+  
   if (R.has('errorStatus', response)) {
     ctx.throw("o shit");
   }
