@@ -2,14 +2,25 @@ const express = require('express');
   const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const R = require('ramda');
 
-const port = process.env.PORT || 3000;
+const {PORT} = require('./config');
+const handler = require('./handler');
+
 
 app.use(express.static("public"));
 app.use(express.json());
 
-http.listen(port, function(){
-  console.log('listening on port:' + port);
+const postHandler_ = R.curry(async (fn, ctx) => {
+  const response = await R.pipe(fn)(ctx.req, ctx.res);
+
+  if (R.has('errorStatus', response)) {
+    ctx.throw("o shit");
+  }
+})
+
+http.listen(PORT,() => {
+  console.log('listening on port:' + PORT);
 });
 
 io.on('connection', (socket) => {
@@ -17,10 +28,7 @@ io.on('connection', (socket) => {
   io.emit('request', "socked is connected");
 });
 
-app.post("/api", (req, res) => {
-    console.log("Receive post request");
-    res.sendStatus(200);
-});
+app.post("/remote", postHandler_(handler.remote));
 
 //const { exec, spawn } = require("child_process");
     //const data = req.body;
