@@ -4,7 +4,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const R = require('ramda');
 
-const {PORT} = require('./config');
+const { PORT } = require('./config');
 const handler = require('./handler');
 
 
@@ -19,9 +19,7 @@ const postHandler_ = R.curry(async (fn, req, res) => {
   }
 })
 
-http.listen(PORT,() => {
-  console.log('listening on port:' + PORT);
-});
+http.listen(PORT, () => console.log('listening on port:' + PORT));
 
 io.on('connection', (socket) => {
   console.log("socked is connected");
