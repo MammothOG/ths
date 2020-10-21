@@ -7,16 +7,15 @@ const isDataFormatCorrect = (data) => {
       && data.session >= 0)) {
 
     if ('status' in data) {
-      if (!['play', 'pause'].includes(data.status)) {
+      if (!(['play', 'pause'].includes(data.status))) {
         console.error("Request argument 'status' is incorrect");
         dataFormatCorrect = false;
       }
     }
 
     if ('move' in data) {
-      if (['next', 'previous', 'start', 'end'].includes(data.move)) {
+      if (!(['next', 'previous', 'start', 'end'].includes(data.move))) {
         console.error("Request argument 'move' is incorrect");
-        errorOutput += "move arg incorrect\n";
         dataFormatCorrect = false;
       }
     }
@@ -44,7 +43,8 @@ const isDataFormatCorrect = (data) => {
     dataFormatCorrect = false;
   }
   // data use correct format
-  return true
+  console.log(dataFormatCorrect)
+  return dataFormatCorrect
 }
 
 const isYoutubeFormatCorrect = (media, errorOutput) => {
