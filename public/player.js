@@ -22,11 +22,13 @@ const controls = [
 
 document.addEventListener('DOMContentLoaded', () => {
   const player = new Plyr('#player', { controls });
+  
+  socket.emit('connection', "hey")
 
   socket.on('request', function (msg) {
     console.log(msg);
-    player.play();
+    //player.play();
     //player.fullscreen.enter();
-    player.currentTime = 30;
+    //player.currentTime = 30;
   });
 });
