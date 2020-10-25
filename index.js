@@ -6,6 +6,7 @@ const R = require('ramda');
 
 const { PORT } = require('./config');
 const { isDataFormatCorrect } = require('./checker')
+const { mediaRequestParser } = require("./parser")
 
 
 app.use(express.static("public"));
@@ -24,8 +25,11 @@ const remoteHandler = (req, res) => {
   const data = req.body;
 
   if (isDataFormatCorrect(data)) {
-    console.log(data);
-    io.emit('remote', data);
+
+    const parsedData = mediaRequestParser(data);
+    console.log("parsed data :", parsedData);
+    io.emit('remote', parsedData);
+
     res.status(200).send(data);
   }
   else {
