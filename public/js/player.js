@@ -52,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   socket.on('media', function (media) {
     console.log('media :', media);
-    switch (media) {
-      case "youtube":
+    switch (media.service) {
+      case 'youtube':
+        displayYoutube(media);
 
         break;
       default:
