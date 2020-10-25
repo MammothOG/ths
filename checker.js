@@ -9,28 +9,28 @@ const isDataFormatCorrect = (data) => {
     if ('status' in data) {
       if (!(['play', 'pause'].includes(data.status))) {
         console.error("Request argument 'status' is incorrect");
-        dataFormatCorrect = false;
+        return false
       }
     }
 
     if ('move' in data) {
       if (!(['next', 'previous', 'end'].includes(data.move))) {
         console.error("Request argument 'move' is incorrect");
-        dataFormatCorrect = false;
+        return false
       }
     }
     
     if ('addmode' in data) {
       if (!(['play', 'append'].includes(data.addmode))) {
         console.error("Request argument 'addmode' is incorrect");
-        dataFormatCorrect = false;
+        return false
       }
     }
     
     if ('volume' in data) {
       if (!(Number.isInteger(data.volume))) {
         console.error("Request argument 'volume' is incorrect");
-        dataFormatCorrect = false;
+        return false
       }
     }
 
@@ -38,11 +38,13 @@ const isDataFormatCorrect = (data) => {
       if ('service' in data.media) {
         switch (data.media.service) {
           case 'youtube':
-            dataFormatCorrect = isYoutubeFormatCorrect(data.media);
+            if (!isYoutubeFormatCorrect(data.media)) {
+              return false
+            }
             break;
           default:
             console.error("Request argument 'media.service' is unknown");
-            dataFormatCorrect = false;
+            return false
             break;
         }
       }
@@ -61,7 +63,7 @@ const isDataFormatCorrect = (data) => {
   return dataFormatCorrect
 }
 
-const isYoutubeFormatCorrect = (media, errorOutput) => {
+const isYoutubeFormatCorrect = (media) => {
   if ('http' in media) {
     return true
   }

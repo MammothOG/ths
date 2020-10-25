@@ -43,12 +43,15 @@ const remoteHandler = (req, res) => {
       }
 
       //console.log(mediaPlaylist);
-      //io.emit('remote', data);
     }
-    
+
     let playerReq = playerRequestBuilder(data);
-    playerReq.media = mediaPlaylist[0];
+    if (!(mediaPlaylist.length === 0)) {
+      playerReq.media = mediaPlaylist[0];
+    }
+
     console.log(playerReq);
+    io.emit('remote', playerReq);
 
     res.status(200).send(data);
   }
