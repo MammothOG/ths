@@ -33,14 +33,22 @@ const remoteHandler = (req, res) => {
     if('media' in data && mediaParser(data)) {
 
       // mode append/play
-      mediaPlaylist.push(data.media);
-      //mediaPlaylist.unshift(data.media);
+      if('addmode' in data) {
+        if (data.addmode === 'append') {
+          mediaPlaylist.push(data.media);
+        }
+        else {
+          mediaPlaylist.unshift(data.media);
+        }
+      }
 
       //console.log(mediaPlaylist);
       //io.emit('remote', data);
     }
-
-    console.log(playerRequestBuilder(data));
+    
+    let playerReq = playerRequestBuilder(data);
+    playerReq.media = mediaPlaylist[0];
+    console.log(playerReq);
 
     res.status(200).send(data);
   }

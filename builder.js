@@ -6,10 +6,6 @@ const playerRequestBuilder = (data) => {
   if ('volume' in data) {
     request.volume = data.volume;
   }
-  if ('media' in data) {
-    request.media = data.media;
-  }
-
   return request;
 }
 
