@@ -14,8 +14,22 @@ const isDataFormatCorrect = (data) => {
     }
 
     if ('move' in data) {
-      if (!(['next', 'previous', 'start', 'end'].includes(data.move))) {
+      if (!(['next', 'previous', 'end'].includes(data.move))) {
         console.error("Request argument 'move' is incorrect");
+        dataFormatCorrect = false;
+      }
+    }
+    
+    if ('addmode' in data) {
+      if (!(['play', 'append'].includes(data.addmode))) {
+        console.error("Request argument 'addmode' is incorrect");
+        dataFormatCorrect = false;
+      }
+    }
+    
+    if ('volume' in data) {
+      if (!(Number.isInteger(data.volume))) {
+        console.error("Request argument 'volume' is incorrect");
         dataFormatCorrect = false;
       }
     }
@@ -43,7 +57,7 @@ const isDataFormatCorrect = (data) => {
     dataFormatCorrect = false;
   }
   // data use correct format
-  console.log(dataFormatCorrect)
+  console.log("Request format :", dataFormatCorrect)
   return dataFormatCorrect
 }
 

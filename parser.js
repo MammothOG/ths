@@ -1,19 +1,30 @@
-const mediaRequestParser = (data) => {
-    let dataParsed = data;
+const url = require('url');
 
+
+const mediaParser = (data) => {
+    let success = true;
     switch (data.media.service) {
         case "youtube":
-            youtubeParser(dataParsed.media)
+            success = youtubeParser(data.media)
             break;
     
         default:
+            console.error("media.service can not be parsed")
+            success = false;
             break;
     }
-    return dataParsed;
+    console.log("Request parsed :", success)
+    return success
 }
 
 const youtubeParser = (media) => {
-    media.http = "test";
+    const query = url.parse(media.http, true).query;
+    if (!('v' in query)) {
+        console.error('Youtube id not found in the http');
+        return false
+    }
+    media.id = query.v;
+    return true
 }
 
-exports.mediaRequestParser = mediaRequestParser;
+exports.mediaParser = mediaParser;
