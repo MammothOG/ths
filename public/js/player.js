@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   socket.emit('connection', "hey")
 
-  socket.on('request', function (msg) {
-    console.log(msg);
+  socket.on('remote', function (msg) {
+    console.log('remote :', msg);
     //player.play();
     //player.fullscreen.enter();
     //player.currentTime = 30;
