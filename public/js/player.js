@@ -23,12 +23,41 @@ const controls = [
 document.addEventListener('DOMContentLoaded', () => {
   const player = new Plyr('#player', { controls });
   
-  socket.emit('connection', "hey")
+  socket.emit('connection', "ready to received");
+  
+  socket.on('status', function (status) {
+    console.log('status :', status);
+    switch (status) {
+      case 'play':
+        player.play();
+        break;
+      case 'pause':
+        player.pause();
+        break;
+      default:
+        console.error('Unknown request : ' + msg)
+        break;
+    }
+  });
 
-  socket.on('remote', function (msg) {
-    console.log('remote :', msg);
-    //player.play();
-    //player.fullscreen.enter();
-    //player.currentTime = 30;
+  socket.on('volume', function (volume) {
+    console.log('volume :', Number(volume) / 100);
+    player.volume = Number(volume) / 100;
+  });
+
+  socket.on('time', function (time) {
+    console.log('time :', Number(time));
+    player.currentTime = Number(time);
+  });
+
+  socket.on('media', function (media) {
+    console.log('media :', media);
+    switch (media) {
+      case "youtube":
+
+        break;
+      default:
+        break;
+    }
   });
 });

@@ -34,6 +34,13 @@ const isDataFormatCorrect = (data) => {
       }
     }
 
+    if ('time' in data) {
+      if (!(Number.isInteger(data.time))) {
+        console.error("Request argument 'time' is incorrect");
+        return false
+      }
+    }
+
     if ('media' in data) {
       if ('service' in data.media) {
         switch (data.media.service) {
@@ -47,6 +54,14 @@ const isDataFormatCorrect = (data) => {
             return false
             break;
         }
+
+        if ('starttime' in data.media) {
+          if (!(Number.isInteger(data.media.starttime))) {
+            console.error("Request argument 'media.startime' is incorrect");
+            return false
+          }
+        }
+
       }
       else {
         console.error("Request argument 'media.service' does not exist");

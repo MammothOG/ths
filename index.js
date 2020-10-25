@@ -41,17 +41,14 @@ const remoteHandler = (req, res) => {
           mediaPlaylist.unshift(data.media);
         }
       }
-
-      //console.log(mediaPlaylist);
     }
 
-    let playerReq = playerRequestBuilder(data);
-    if (!(mediaPlaylist.length === 0)) {
-      playerReq.media = mediaPlaylist[0];
-    }
+    const playerReq = playerRequestBuilder(data, mediaPlaylist);
 
-    console.log(playerReq);
-    io.emit('remote', playerReq);
+    console.log("request sended", playerReq)
+    Object.keys(playerReq).forEach(function(key) {
+      io.emit(key, playerReq[key]);
+    });
 
     res.status(200).send(data);
   }
@@ -61,13 +58,10 @@ const remoteHandler = (req, res) => {
 }
 
 http.listen(PORT, () => console.log('listening on port:' + PORT));
-
-io.on('connection', (socket) => {
-  console.log("socked is connected");
-  io.emit('request', 200);
-});
+io.on('connection', (socket) => console.log("socked is connected"));
 
 app.post("/remote", postHandler_(remoteHandler));
+
 
 
 
