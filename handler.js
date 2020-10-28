@@ -6,7 +6,7 @@ const remoteHandler = (req, res) => {
   let data = req.body;
 
   if (isDataFormatCorrect(data)) {
-    //vlcRemote(data);
+    //await vlcRemote(data);
 
     res.status(200).send(data);
   }

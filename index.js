@@ -20,3 +20,8 @@ const postHandler_ = R.curry(async (fn, req, res) => {
 app.listen(PORT, () => console.log('listening on port:' + PORT));
 
 app.post("/remote", postHandler_(remoteHandler));
+const testAsync = async (req, res) => {
+  console.log("working");
+}
+
+//app.post("/remote", testAsync);

@@ -1,0 +1,30 @@
+POST http://localhost:3000/remote
+Content-Type: application/json
+
+{
+    "session": 0,
+    "status": "pause",
+    "move": "next",
+    "volume": 100,
+    "addmode": "play",
+    "time": 0,
+    "media": {
+        "service": "youtube",
+        "starttime": 0,
+        "http": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO"
+    }
+}
+//{
+//  "session": 0, // 0(New session), 1, 2...
+//  "status": "pause", // pause, play
+//  "move": "next", // end, next
+//  "volume": 100, // 0 to 100
+//  "addmode": "play", // append, play(default)
+//  "time": 0,
+//  "media": {
+//    "service": "youtube", // local, twitch...
+//    "starttime": 0, // in second TODO checking integrity of data
+//    //"file": "",
+//    "http": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO",
+//  }
+//}
