@@ -1,3 +1,4 @@
+const { propSatisfies } = require("ramda");
 const VLC = require("vlc-client");
 const vlc = new VLC.Client({
     ip: "localhost",
@@ -6,7 +7,7 @@ const vlc = new VLC.Client({
     password: "toto"
 });
 
-switch (platform()) {
+switch (process.platform) {
     case "darwin":
         cmd = "/Applications/VLC.app/Contents/MacOS/VLC";
         intf = "macosx";
@@ -16,7 +17,7 @@ switch (platform()) {
         intf = "qt"
         break;
     default:
-        throw new Error(`Platform '${platform()}' is not supported for testing`);
+        throw new Error(`Platform '${process.platform}' is not supported for testing`);
 }
 
 
