@@ -1,7 +1,8 @@
 const { isDataFormatCorrect } = require('./checker');
-const { vlcRemote } = require('./vlc');
+const { vlcRemote } = require('./vlclaucher');
+const { PORT } = require('./config');
 
-const remoteHandler = (req, res) => {
+const remoteHandler = async (req, res) => {
   console.log("Receive post request");
   let data = req.body;
 
@@ -15,4 +16,9 @@ const remoteHandler = (req, res) => {
   }
 }
 
+const readyHandler = async () => {
+  console.log('listening on port:' + PORT)
+}
+
+exports.readyHandler = readyHandler;
 exports.remoteHandler = remoteHandler;
