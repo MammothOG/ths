@@ -2,7 +2,7 @@ const VLC = require("vlc-client");
 const { exec, spawn } = require("child_process");
 const { createWriteStream } = require("fs");
 const path = require("path");
-
+const { VLC_HTTP_PORT, VLC_HTTP_HOST, VLC_HTTP_PASSWORD } = require("./config");
 
 
 switch (process.platform) {
@@ -22,9 +22,9 @@ switch (process.platform) {
 const args = [
     "-I", intf,
     "--extraintf", "http",
-    "--http-port", "8080",
-    "--http-host", "localhost",
-    "--http-password", "1234",
+    "--http-port", VLC_HTTP_PORT.toString(),
+    "--http-host", VLC_HTTP_HOST,
+    "--http-password", VLC_HTTP_PASSWORD,
 ];
 
 exec("export DISPLAY=:0", (error, stdout, stderr) => {
@@ -36,7 +36,7 @@ const spawnVlc = async () => {
         stdio: "pipe"
     });
 
-    console.log(path.join(__dirname, "../vlc.log"))
+    console.log(path.join(__dirname, "vlc.log"))
     const output = createWriteStream(path.join(__dirname, "vlc.log"));
     vlcProcess.stderr.pipe(output);
     vlcProcess.stdout.pipe(output);
@@ -68,12 +68,14 @@ const spawnVlc = async () => {
     })
 }
 
-(async () => {
-    let vlcProcess = await spawnVlc();
-    let vlc = new VLC.Client({
-        ip: "localhost",
-        port: 8080,
-        password: "1234"
-    });
-    await vlc.playFile('vid/sample.mp4');
-})();
+exports.spawnVlc = spawnVlc;
+
+//(async () => {
+//    let vlcProcess = await spawnVlc();
+//    let vlc = new VLC.Client({
+//        ip: "localhost",
+//        port: 8080,
+//        password: "1234"
+//    });
+//    await vlc.playFile('https://www.youtube./watch?v=D5gQ8EFhVSI&ab_channel=Onliner');
+//})();
