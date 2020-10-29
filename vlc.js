@@ -14,7 +14,6 @@ const startVlc = async () => {
         port: VLC_HTTP_PORT,
         password: VLC_HTTP_PASSWORD
     });
-    await vlc.toggleFullscreen();
 }
 
 const updateVlc = async (request) => {
@@ -26,6 +25,10 @@ const updateVlc = async (request) => {
         else {
             // play media 
 
+            if (request.media.starttime !== undefined) {
+                // move to the time
+
+            }
         }
         request.media.service
     }

@@ -39,41 +39,27 @@ const isDataFormatCorrect = (data) => {
 
 
   if ('media' in data) {
-    if ('service' in data.media) {
-      switch (data.media.service) {
-        case 'youtube':
-          if (!isYoutubeFormatCorrect(data.media)) {
-            return false
-          }
-          break;
-        default:
-          console.error("Request argument 'media.service' is unknown");
-          return false
-          break;
-      }
+    if (!(['youtube', 'local'].includes(data.media.service))) {
+      console.error("Request argument 'media.service' is unknown");
+      return false
+    }
 
-      if ('starttime' in data.media) {
-        if (!(Number.isInteger(data.media.starttime))) {
-          console.error("Request argument 'media.startime' is incorrect");
-          return false
-        }
-      }
+    // TODO modify to adapt to service
+    if(!('path' in data.media)) {
+      console.error("Request argument 'media.path' is unknown");
+      return false
+    }
 
-      // data use correct format
-      console.log("Request format :", dataFormatCorrect)
-      return dataFormatCorrect
+    if ('starttime' in data.media) {
+      if (!(Number.isInteger(data.media.starttime))) {
+        console.error("Request argument 'media.startime' is incorrect");
+        return false
+      }
     }
   }
-}
-
-const isYoutubeFormatCorrect = (media) => {
-  if ('http' in media) {
-    return true
-  }
-  else {
-    console.error("Request argument 'media.service.http' is incorrect")
-    return false
-  }
+  // data use correct format
+  console.log("Request format :", dataFormatCorrect)
+  return dataFormatCorrect
 }
 
 exports.isDataFormatCorrect = isDataFormatCorrect;

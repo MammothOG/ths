@@ -7,7 +7,7 @@ const remoteHandler = async (req, res) => {
   let request = req.body;
 
   if (isDataFormatCorrect(request)) {
-    await updateVlc(request);
+    //await updateVlc(request);
 
     res.status(200).send(request);
   }
@@ -19,7 +19,8 @@ const remoteHandler = async (req, res) => {
 const readyHandler = async () => {
   console.log('listening on port:' + PORT);
   console.log('lauching VLC')
-  await startVlc();
+  // ATTENTION !!!!!!!!!!
+  //await startVlc();
 }
 
 exports.readyHandler = readyHandler;
