@@ -23,8 +23,10 @@ const vlcArgs = [
     "--http-port", VLC_HTTP_PORT.toString(),
     "--http-host", VLC_HTTP_HOST,
     "--http-password", VLC_HTTP_PASSWORD,
+    "--fullscreen"
 ];
 
+// fix this
 exec("export DISPLAY=:0", (error, stdout, stderr) => {
     console.log("exec: export DISPLAY=:0");
 });

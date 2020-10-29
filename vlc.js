@@ -14,11 +14,12 @@ const startVlc = async () => {
         port: VLC_HTTP_PORT,
         password: VLC_HTTP_PASSWORD
     });
+    await vlc.toggleFullscreen();
 }
 
 const updateVlc = async (request) => {
     console.log(request);
-    console.log(await vlc.playFile("./vid/sample.mp4"));
+    //console.log(await vlc.playFile("./vid/sample.mp4"));
 }
 
 exports.updateVlc = updateVlc;
