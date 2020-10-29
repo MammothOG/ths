@@ -16,7 +16,7 @@ const startVlc = async () => {
     });
 }
 
-const vlcUpdateState = async (request) => {
+const updateVlc = async (request) => {
     console.log(request);
 }
 
