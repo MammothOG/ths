@@ -18,7 +18,8 @@ const startVlc = async () => {
 
 const updateVlc = async (request) => {
     console.log(request);
+    console.log(await vlc.playFile("./vid/sample.mp4"));
 }
 
-
-exports.vlcRemote = vlcRemote;
+exports.updateVlc = updateVlc;
+exports.startVlc = startVlc;

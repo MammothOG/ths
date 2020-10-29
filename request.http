@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "session": 0,
-    "status": "pause",
+    "status": "play",
     "move": "next",
     "volume": 100,
     "addmode": "play",

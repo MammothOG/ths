@@ -1,7 +1,6 @@
 const { isDataFormatCorrect } = require('./checker');
-const { vlcRemote } = require('./vlclaucher');
+const { startVlc, updateVlc } = require('./vlc');
 const { PORT } = require('./config');
-const { update } = require('ramda');
 
 const remoteHandler = async (req, res) => {
   console.log("Receive post request");
@@ -19,7 +18,6 @@ const remoteHandler = async (req, res) => {
 
 const readyHandler = async () => {
   console.log('listening on port:' + PORT);
-
   console.log('lauching VLC')
   await startVlc();
 }

@@ -17,8 +17,8 @@ switch (process.platform) {
         throw new Error(`Platform '${process.platform}' is not supported for testing`);
 }
 
-const args = [
-    "-I", intf,
+const vlcArgs = [
+    "-I", "dummy",
     "--extraintf", "http",
     "--http-port", VLC_HTTP_PORT.toString(),
     "--http-host", VLC_HTTP_HOST,
@@ -30,7 +30,7 @@ exec("export DISPLAY=:0", (error, stdout, stderr) => {
 });
 
 const spawnVlc = async () => {
-    const vlcProcess = spawn(cmd, args, {
+    const vlcProcess = spawn(cmd, vlcArgs, {
         stdio: "pipe"
     });
 
