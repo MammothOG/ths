@@ -2,7 +2,6 @@ POST http://localhost:3000/remote
 Content-Type: application/json
 
 {
-    "session": 0,
     "status": "play",
     "move": "next",
     "volume": 100,
