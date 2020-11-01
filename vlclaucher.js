@@ -26,14 +26,10 @@ const vlcArgs = [
     "--fullscreen"
 ];
 
-// fix this
-exec("export DISPLAY=:0", (error, stdout, stderr) => {
-    console.log("exec: export DISPLAY=:0");
-});
-
 const spawnVlc = async () => {
     const vlcProcess = spawn(cmd, vlcArgs, {
-        stdio: "pipe"
+        stdio: "pipe",
+        env: { "DISPLAY": ":0"}
     });
 
     console.log(path.join(__dirname, "vlc.log"))

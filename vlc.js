@@ -9,6 +9,7 @@ let vlc;
 
 const startVlc = async () => {
     vlcProcess = await spawnVlc();
+
     vlc = new VLC.Client({
         ip: VLC_HTTP_HOST,
         port: VLC_HTTP_PORT,
@@ -20,15 +21,11 @@ const updateVlc = async (request) => {
     if (request.media !== undefined) {
         if (request.addmode === "append") {
             // add to playlist media
-
+            await vlc.addToPlaylist(request.media.path);
         }
         else {
             // play media 
-
-            if (request.media.starttime !== undefined) {
-                // move to the time
-
-            }
+            await vlc.playFile(request.media.path);
         }
         request.media.service
     }
@@ -36,12 +33,11 @@ const updateVlc = async (request) => {
     // change player state
     switch (request.status) {
         case "play":
-            
+            await vlc.play();
             break;
         case "pause":
-            
+            await vlc.pause();
             break;
-    
         default:
             break;
     }
@@ -49,13 +45,13 @@ const updateVlc = async (request) => {
     // change media
     switch (request.move) {
         case 'next':
-            
+            await vlc.next();
             break;
         case 'previous':
-            
+            await vlc.previous();
             break;
         case 'end':
-            
+        
             break;
         default:
             break;
@@ -63,11 +59,12 @@ const updateVlc = async (request) => {
 
     if (request.volume !== undefined) {
         // change volume
-        
+        await vlc.setVolume(request.volume);
     }
 
     if (request.time !== undefined) {
         // change time
+        await vlc.setTime(request.time);
 
     }
 

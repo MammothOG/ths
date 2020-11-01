@@ -49,13 +49,6 @@ const isDataFormatCorrect = (data) => {
       console.error("Request argument 'media.path' is unknown");
       return false
     }
-
-    if ('starttime' in data.media) {
-      if (!(Number.isInteger(data.media.starttime))) {
-        console.error("Request argument 'media.startime' is incorrect");
-        return false
-      }
-    }
   }
   // data use correct format
   console.log("Request format :", dataFormatCorrect)

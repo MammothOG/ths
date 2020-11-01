@@ -3,14 +3,13 @@ Content-Type: application/json
 
 {
     "status": "play",
-    "move": "next",
     "volume": 100,
     "addmode": "play",
     "time": 0,
     "media": {
         "service": "youtube",
-        "starttime": 0,
-        "path": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO"
+        //"path": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO"
+        "path": "./vid/sample.mp4"
     }
 }
 //{
@@ -21,7 +20,6 @@ Content-Type: application/json
 //  "time": 0,
 //  "media": {
 //    "service": "youtube", // local, twitch...
-//    "starttime": 0, // in second TODO checking integrity of data
 //    //"file": "",
 //    "http": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO",
 //  }
