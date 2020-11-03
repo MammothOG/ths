@@ -10,7 +10,7 @@ const isDataFormatCorrect = (data) => {
   }
 
   if ('move' in data) {
-    if (!(['next', 'previous', 'end'].includes(data.move))) {
+    if (!(['next', 'previous'].includes(data.move))) {
       console.error("Request argument 'move' is incorrect");
       return false
     }

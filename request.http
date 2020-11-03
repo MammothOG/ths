@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 //{
 //  "status": "pause", // pause, play
-//  "move": "next", // end, next
+//  "move": "next", // next
 //  "volume": 100, // 0 to 100
 //  "addmode": "play", // append, play(default)
 //  "time": 0,
