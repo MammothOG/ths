@@ -31,7 +31,7 @@ const isDataFormatCorrect = (data) => {
   }
 
   if ('addmode' in data) {
-    if (!(['play', 'append'].includes(data.addmode))) {
+    if (!(['play', 'addnext', 'addplaylist'].includes(data.addmode))) {
       console.error("Request argument 'addmode' is incorrect");
       return false
     }
