@@ -8,6 +8,7 @@ let vlcProcess;
 let vlc;
 
 const startVlc = async () => {
+    console.log('Starting VLC');
     vlcProcess = await spawnVlc();
 
     vlc = new VLC.Client({

@@ -19,7 +19,6 @@ const remoteHandler = async (req, res) => {
 
 const readyHandler = async () => {
   console.log('listening on port : ' + PORT);
-  console.log('lauching VLC')
   //await startVlc();
 }
 
