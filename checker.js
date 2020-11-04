@@ -1,58 +1,56 @@
+const checkSringArg = (json, arg, option = null, mandatory = true) => {
+  let correct = true;
+  if (arg in json) {
+    if (option === null) {
+      correct = false;
+    } else if (!(option.includes(json[arg]))) {
+      console.error("Request argument '" + arg + "' is incorrect");
+      correct = false;
+    }
+  } else if (mandatory) {
+    console.error("Request argument '" + arg + "' is needed");
+    correct = false;
+  }
+  return correct
+}
+
+const checkNumberArg = (json, arg, min = Infiniity, max = Infinity, mandatory = true) => {
+  let correct = true;
+  if (arg in json) {
+    if (!(Number.isInteger(json[arg]))) {
+      console.error("Request argument '" + arg + "' is incorrect");
+      correct = false;
+    } else if (json[arg] < min) {
+      console.error("Request argument '" + arg + "' is too small (min = " + min + ")");
+      correct = false;
+    } else if (json[arg] > max) {
+      console.error("Request argument '" + arg + "' is too big (max = " + max + ")");
+      correct = false;
+    }
+  }
+  else if (mandatory) {
+    console.error("Request argument '" + arg + "' is needed");
+    correct = false;
+  }
+  return correct
+}
 
 const isDataFormatCorrect = (data) => {
-  let dataFormatCorrect = true;
+  let correct = true;
 
-  if ('status' in data) {
-    if (!(['play', 'pause'].includes(data.status))) {
-      console.error("Request argument 'status' is incorrect");
-      return false
-    }
-  }
-
-  if ('move' in data) {
-    if (!(['next', 'previous', 'end'].includes(data.move))) {
-      console.error("Request argument 'move' is incorrect");
-      return false
-    }
-  }
-
-  if ('volume' in data) {
-    if (!(Number.isInteger(data.volume))) {
-      console.error("Request argument 'volume' is incorrect");
-      return false
-    }
-  }
-
-  if ('time' in data) {
-    if (!(Number.isInteger(data.time))) {
-      console.error("Request argument 'time' is incorrect");
-      return false
-    }
-  }
-
-  if ('addmode' in data) {
-    if (!(['play', 'addnext', 'addplaylist'].includes(data.addmode))) {
-      console.error("Request argument 'addmode' is incorrect");
-      return false
-    }
-  }
-
+  correct = checkSringArg(data, 'action', ['play', 'pause', 'next', 'previous', 'stop'], false) ? correct : false;
+  correct = checkSringArg(data, 'playlist', ['clearall'], false) ? correct : false;
+  correct = checkNumberArg(data, 'volume', 0, 100, false) ? correct : false;
+  correct = checkNumberArg(data, 'time', 0, Infinity, false) ? correct : false;
 
   if ('media' in data) {
-    if (!(['youtube', 'local'].includes(data.media.service))) {
-      console.error("Request argument 'media.service' is unknown");
-      return false
-    }
-
-    // TODO modify to adapt to service
-    if(!('path' in data.media)) {
-      console.error("Request argument 'media.path' is unknown");
-      return false
-    }
+    correct = checkSringArg(data.media, 'service', ['youtube', 'local'], true) ? correct : false;
+    correct = checkSringArg(data.media, 'position', ['now', 'next', 'end'], false) ? correct : false;
+    correct = checkSringArg(data.media, 'path', null, false) ? correct : false;
   }
-  // data use correct format
-  console.log("Request format :", dataFormatCorrect)
-  return dataFormatCorrect
+
+  console.log("Request format :", correct)
+  return correct
 }
 
 exports.isDataFormatCorrect = isDataFormatCorrect;

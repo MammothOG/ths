@@ -2,25 +2,23 @@ POST http://localhost:3000/remote
 Content-Type: application/json
 
 {
-    "status": "play",
+    "action": "next",
     "volume": 100,
-    "addmode": "play",
-    "time": 0,
+    "playlist": "clearall",
     "media": {
         "service": "youtube",
-        //"path": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO"
-        "path": "./vid/sample.mp4"
+        "position": "end"
     }
 }
+
 //{
-//  "status": "pause", // pause, play
-//  "move": "next", // end, next
+//  "action": "pause", // pause, play, next, previous, stop
 //  "volume": 100, // 0 to 100
-//  "addmode": "play", // append, play(default)
 //  "time": 0,
+//  "playlist": "clearall",
 //  "media": {
+//    "position": "end", // now, next
 //    "service": "youtube", // local, twitch...
-//    //"file": "",
-//    "http": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO",
+//    "url": "https://www.youtube.com/watch?v=fWNaR-rxAic&ab_channel=CarlyRaeJepsenVEVO",
 //  }
 //}
