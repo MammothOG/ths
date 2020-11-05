@@ -20,42 +20,40 @@ const startVlc = async () => {
 
 const updateVlc = async (request) => {
     if (request.media !== undefined) {
-        if (request.addmode === "append") {
-            // add to playlist media
-            await vlc.addToPlaylist(request.media.path);
+        switch (request.media.position) {
+            case "end":
+                await vlc.addToPlaylist(request.media.path);
+                break;
+            case "next":
+                break;
+            default:
+                await vlc.playFile(request.media.path);
+                break;
         }
-        else {
-            // play media 
-            await vlc.playFile(request.media.path);
-        }
-        request.media.service
     }
 
-    // change player state
-    switch (request.status) {
-        case "play":
-            await vlc.play();
-            break;
-        case "pause":
-            await vlc.pause();
-            break;
-        default:
-            break;
-    }
-    
-    // change media
-    switch (request.move) {
-        case 'next':
-            await vlc.next();
-            break;
-        case 'previous':
-            await vlc.previous();
-            break;
-        case 'end':
-        
-            break;
-        default:
-            break;
+    // change exec action on the player
+    if (request.action !== undefined) {
+        switch (request.action) {
+            case "play":
+                await vlc.play();
+                break;
+            case "pause":
+                await vlc.pause();
+                break;
+            case 'next':
+                await vlc.next();
+                break;
+            case 'previous':
+                await vlc.previous();
+                break;
+            case 'stop':
+                await vlc.previous();
+                break;
+            case 'clearplaylist':
+                await vlc.previous();
+                break;
+        }
     }
 
     if (request.volume !== undefined) {
