@@ -48,10 +48,10 @@ const updateVlc = async (request) => {
                 await vlc.previous();
                 break;
             case 'stop':
-                await vlc.previous();
+                await vlc.stop();
                 break;
             case 'clearplaylist':
-                await vlc.previous();
+                await vlc.emptyPlaylist();
                 break;
         }
     }
